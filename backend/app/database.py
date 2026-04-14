@@ -1,10 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
-
-
-# Database url
-
-DATABASE_URL = "mysql+pymysql://root:123456@localhost/eyercall_lms"
+from app.core.config import DATABASE_URL
 
 # create engine
 engine = create_engine(DATABASE_URL)
