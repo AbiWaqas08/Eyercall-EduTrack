@@ -1,22 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import './App.css'
-
-import LandingPage from './LandingPage'
-
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  
-  return (
-    <Router>
-      <Routes>
-
-        {/* Public Routes */}
-        <Route path="/" element={<LandingPage />} />
-        {/* <Route path="/login" element={<Login />} /> */}
-
-      </Routes>
-    </Router>
-  )
+  return <AppRoutes />;
 }
 
-export default App
+export default App;
