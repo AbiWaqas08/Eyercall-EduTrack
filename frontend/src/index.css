@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* 🎨 Define theme colors */
+@theme {
+  --color-primary: #4F46E5;
+  --color-primary-hover: #4338CA;
+
+  --color-secondary: #06B6D4;
+  --color-secondary-hover: #0891B2;
+
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+
+  --color-background: #F9FAFB;
+  --color-surface: #FFFFFF;
+  --color-border: #E5E7EB;
+
+  --color-text-primary: #111827;
+  --color-text-secondary: #6B7280;
+}
