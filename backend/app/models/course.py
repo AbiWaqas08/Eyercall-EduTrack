@@ -12,7 +12,7 @@ class Course(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(100), unique=True, index=True)
     description = Column(String(255), nullable=True)
-    duration_days = Column(Integer)
+    duration = Column(Integer)
 
     # relationships
     

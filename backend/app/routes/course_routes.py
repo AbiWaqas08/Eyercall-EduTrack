@@ -9,7 +9,7 @@ from app.schemas.course import CourseCreate
 router = APIRouter(prefix="/courses", tags=["Courses"])
 
 # create post router
-@router.post("/")
+
 @router.post("/")
 def create_course(data: CourseCreate, db: Session = Depends(get_db)):
 

@@ -1,6 +1,8 @@
+
 import CreateBatch from "./CreateBatch";
 import CreateCourse from "./CreateCourse";
 import CreateStudent from "./CreateStudent";
+
 
 const AdminDashboard = () => {
   return (

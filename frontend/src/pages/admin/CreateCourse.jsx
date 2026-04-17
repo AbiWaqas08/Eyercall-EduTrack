@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "../../api/axios";
+import { createCourse } from "../../api/courseApi";
 
 const CreateCourse = () => {
   const [form, setForm] = useState({
@@ -8,22 +8,24 @@ const CreateCourse = () => {
     duration: "",
   });
 
-  const [loading, setLoading] = useState(false);
-
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
     try {
-      await axios.post("/courses/", {
+      const payload = {
         title: form.title,
         description: form.description,
-        duration_days: Number(form.duration),
-      });
+        duration: Number(form.duration),
+      };
+
+      await createCourse(payload);
 
       alert("Course created successfully");
 
@@ -33,60 +35,52 @@ const CreateCourse = () => {
         duration: "",
       });
 
-    } catch (error) {
-      console.error(error);
-      alert("Error creating course");
-    } finally {
-      setLoading(false);
+    } catch (err) {
+      alert(err.response?.data?.detail || "Error creating course");
+      console.log(err);
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
-      <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+    <div className="p-6 max-w-md bg-white shadow rounded">
+      <h2 className="text-xl font-bold mb-4">Create Course</h2>
 
-        <h2 className="text-xl font-bold mb-4">Create Course</h2>
+      <form onSubmit={handleSubmit} className="space-y-3">
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          type="text"
+          name="title"
+          placeholder="Course Title"
+          value={form.title}
+          onChange={handleChange}
+          className="w-full border p-2 rounded"
+          required
+        />
 
-          <input
-            type="text"
-            name="title"
-            placeholder="Course Title"
-            value={form.title}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded"
-            required
-          />
+        <input
+          type="text"
+          name="description"
+          placeholder="Description"
+          value={form.description}
+          onChange={handleChange}
+          className="w-full border p-2 rounded"
+        />
 
-          <textarea
-            name="description"
-            placeholder="Course Description"
-            value={form.description}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded"
-          />
+        <input
+          type="number"
+          name="duration"
+          placeholder="Duration (days)"
+          value={form.duration}
+          onChange={handleChange}
+          className="w-full border p-2 rounded"
+          required
+        />
 
-          <input
-            type="number"
-            name="duration"
-            placeholder="Duration (days)"
-            value={form.duration}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded"
-            required
-          />
+        <button className="w-full bg-blue-600 text-white py-2 rounded">
+          Create Course
+        </button>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-          >
-            {loading ? "Creating..." : "Create Course"}
-          </button>
-
-        </form>
-      </div>
+      </form>
     </div>
   );
 };
