@@ -1,12 +1,21 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
-class LoginSchema(BaseModel):
-    email : str
+# 🔐 Admin Signup
+class AdminSignup(BaseModel):
+    name: str
+    email: EmailStr
     password: str
 
-class tokenResponse(BaseModel):
+
+# 🔐 Login
+class LoginSchema(BaseModel):
+    email: EmailStr
+    password: str
+
+
+# 🎯 Response
+class TokenResponse(BaseModel):
     access_token: str
     role: str
     name: str
     email: str
-    

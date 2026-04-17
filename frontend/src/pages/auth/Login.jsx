@@ -14,23 +14,29 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  // 🔐 Handle login
+  //  Handle login
   const onSubmit = async (data) => {
-    try {
-      const res = await loginUser(data);
+  try {
+    const res = await loginUser(data);
 
-      const { access_token, role, name, email } = res.data;
+    login(
+      res.data.access_token,
+      res.data.role,
+      res.data.name,
+      res.data.email
+    );
 
-      login(access_token, role, name, email);
-
-      // 🎯 Redirect based on role
-      navigate(role === "admin" ? "/admin" : "/user");
-
-    } catch (error) {
-      console.error("Login error:", error);
-      alert("Invalid email or password");
+    //  ROLE BASED REDIRECT
+    if (res.data.role === "admin") {
+      navigate("/admin");
+    } else {
+      navigate("/user");
     }
-  };
+
+  } catch (error) {
+    alert("Invalid credentials");
+  }
+};
 
   // 🎨 Input wrapper
   const InputField = ({ icon: Icon, children }) => (

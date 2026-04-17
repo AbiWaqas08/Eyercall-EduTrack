@@ -1,4 +1,3 @@
-
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from app.database import Base
@@ -7,17 +6,17 @@ import datetime
 class User(Base):
     # table name
     __tablename__ = "users"
-
-    # colums of table
+    
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(100))
-    email = Column(String(100), unique=True, index=True)
-    password = Column(String(255))
-    # role = admin / student
-    role = Column(String(100))
 
+    name = Column(String(100), nullable=False)
+    email = Column(String(100), unique=True, index=True, nullable=False)
+    password = Column(String(255), nullable=False)
 
-    #  LMS FIELDS
+    # roles: admin / student
+    role = Column(String(20), nullable=False)
+
+    # LMS FIELDS
     course_id = Column(Integer, ForeignKey("courses.id"), nullable=True)
     batch_id = Column(Integer, ForeignKey("batches.id"), nullable=True)
 
@@ -31,4 +30,3 @@ class User(Base):
     # relationships
     course = relationship("Course", back_populates="students")
     batch = relationship("Batch", back_populates="students")
-    

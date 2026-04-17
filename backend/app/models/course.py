@@ -15,5 +15,6 @@ class Course(Base):
     duration_days = Column(Integer)
 
     # relationships
+    
     students = relationship("User", back_populates="course")
     batches = relationship("Batch", back_populates="course")

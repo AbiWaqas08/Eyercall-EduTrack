@@ -33,11 +33,11 @@ const LandingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--color-background)] text-[var(--color-text-primary)]">
+    <div className="min-h-screen bg-background text-primary">
 
       {/* 🔝 NAVBAR */}
-      <header className="flex justify-between items-center px-8 py-4 bg-white border-b border-[var(--color-border)] shadow-sm">
-        <h1 className="text-xl font-bold text-[var(--color-primary)]">
+      <header className="flex justify-between items-center px-8 py-4 bg-white border-b border-border shadow-sm">
+        <h1 className="text-xl font-bold text-primary">
           Eyercall EduTrack
         </h1>
 
@@ -50,18 +50,18 @@ const LandingPage = () => {
         </button>
       </header>
 
-      {/* 🎯 HERO SECTION */}
+      {/* HERO SECTION */}
       <section className="text-center py-20 px-6">
         <h2 className="text-4xl md:text-5xl font-bold mb-4">
           Welcome to Eyercall EduTrack
         </h2>
 
-        <p className="max-w-xl mx-auto text-[var(--color-text-secondary)] mb-6">
+        <p className="max-w-xl mx-auto text-secondary mb-6">
           A complete Learning Management System designed to manage students,
           track fees, and streamline assignments efficiently.
         </p>
 
-        <p className="text-sm text-[var(--color-text-secondary)] mb-6">
+        <p className="text-sm text-secondary mb-6">
           Accounts are created by admin. Contact your institute for login credentials.
         </p>
 
@@ -84,15 +84,15 @@ const LandingPage = () => {
           {features.map((f, i) => (
             <div
               key={i}
-              className="p-6 rounded-xl border border-[var(--color-border)] shadow-sm hover:shadow-md transition"
+              className="p-6 rounded-xl border border-border shadow-sm hover:shadow-md transition"
             >
-              <f.icon className="w-10 h-10 mb-4 text-[var(--color-primary)]" />
+              <f.icon className="w-10 h-10 mb-4 text-primary" />
 
               <h4 className="font-semibold text-lg mb-2">
                 {f.title}
               </h4>
 
-              <p className="text-sm text-[var(--color-text-secondary)]">
+              <p className="text-sm text-secondary">
                 {f.desc}
               </p>
             </div>
@@ -100,13 +100,13 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* 🚀 CTA */}
+      {/*  CTA */}
       <section className="text-center py-16 px-6">
         <h3 className="text-2xl font-bold mb-4">
           Start Managing Your Academy Today
         </h3>
 
-        <p className="text-[var(--color-text-secondary)] mb-6">
+        <p className="text-secondary mb-6">
           Simplify operations with Eyercall EduTrack.
         </p>
 
@@ -119,8 +119,8 @@ const LandingPage = () => {
         </button>
       </section>
 
-      {/* 🔻 FOOTER */}
-      <footer className="text-center py-4 border-t border-[var(--color-border)] text-sm text-[var(--color-text-secondary)] bg-white">
+      {/*  FOOTER */}
+      <footer className="text-center py-4 border-t border-border text-sm text-secondary bg-white">
         © 2026 Eyercall EduTrack. All rights reserved.
       </footer>
     </div>

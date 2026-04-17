@@ -1,67 +1,33 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
 
-// Pages
 import Login from "../pages/auth/Login";
+import AdminDashboard from "../pages/admin/AdminDashboard";
+import CreateStudent from "../pages/admin/CreateStudent";
+import CreateCourse from "../pages/admin/CreateCourse";
+import CreateBatch from "../pages/admin/CreateBatch"
 import LandingPage from "../LandingPage"
 
 const AppRoutes = () => {
-  const { user } = useAuth();
+  const user = { role: "admin" }; // test
 
   return (
     <Router>
       <Routes>
 
-        {/* 🔓 Public Route */}
-        <Route path="/" element={<LandingPage/>}/>
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<LandingPage/>} />
 
-        {/* 🔐 Protected Admin Route */}
-        <Route
-          path="/admin"
-          element={
-            user ? (
-              user.role === "admin" ? (
-                <h1>Admin Dashboard</h1> // simple for phase 1
-              ) : (
-                <Navigate to="/user" />
-              )
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
+        {user?.role === "admin" && (
+          <Route path="/admin" element={<AdminDashboard />}>
+            <Route path="create-student" element={<CreateStudent />} />
+            <Route path="create-course" element={<CreateCourse />} />
+            <Route path="create-student" element={<CreateBatch />} />
+          </Route>
+        )}
 
-        {/* 🔐 Protected User Route */}
-        <Route
-          path="/user"
-          element={
-            user ? (
-              user.role === "user" ? (
-                <h1>User Dashboard</h1> // simple for phase 1
-              ) : (
-                <Navigate to="/admin" />
-              )
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-
-        {/* 🔁 Default Redirect */}
         <Route
           path="*"
-          element={
-            <Navigate
-              to={
-                user
-                  ? user.role === "admin"
-                    ? "/admin"
-                    : "/user"
-                  : "/login"
-              }
-            />
-          }
+          element={<Navigate to="/login" replace />}
         />
 
       </Routes>
