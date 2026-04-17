@@ -19,10 +19,10 @@ const CreateCourse = () => {
     setLoading(true);
 
     try {
-      await axios.post("/courses", {
+      await axios.post("/courses/", {
         title: form.title,
         description: form.description,
-        duration: Number(form.duration),
+        duration_days: Number(form.duration),
       });
 
       alert("Course created successfully");

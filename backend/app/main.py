@@ -1,37 +1,32 @@
 from fastapi import FastAPI
-from app.database import Base, engine
-from app.routes import auth
-from app.routes import batch_routes
-from app.routes import course_routes
-
-from app.models import user, course, batch
-
-app =FastAPI()
-
-Base.metadata.create_all(bind= engine)
-
-
-# auth routes in main file
-app.include_router(auth.router)
-
-app.include_router(course_routes.router)
-
-app.include_router(batch_routes.router)
-
-@app.get("/")
-def api_check():
-    return{"message": "api is working"}
-
-origins = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
-
 from fastapi.middleware.cors import CORSMiddleware
+
+# import routers
+from app.routes import auth
+from app.routes import student_routes
+from app.routes import course_routes
+from app.routes import batch_routes
+
+# create app
+app = FastAPI()
+
+# ✅ CORS CONFIG (IMPORTANT)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ✅ ROUTES REGISTER
+app.include_router(auth.router, prefix="/auth")
+app.include_router(student_routes.router)
+app.include_router(course_routes.router)
+app.include_router(batch_routes.router)
+
+
+# ✅ TEST ROUTE
+@app.get("/")
+def home():
+    return {"message": "LMS Backend Running"}

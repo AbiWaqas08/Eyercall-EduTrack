@@ -5,7 +5,7 @@ from pydantic import BaseModel
 class CourseBase(BaseModel):
     title :  str
     description : str | None = None
-    duration : int
+    duration_days : int
 
 
 # create course

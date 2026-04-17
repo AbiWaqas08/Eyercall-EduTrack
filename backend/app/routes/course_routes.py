@@ -10,12 +10,29 @@ router = APIRouter(prefix="/courses", tags=["Courses"])
 
 # create post router
 @router.post("/")
-def create_course(course : CourseCreate, db : Session = Depends(get_db)):
-    new_course = Course(**course.dict())
-    db.add(new_course)
+@router.post("/")
+def create_course(data: CourseCreate, db: Session = Depends(get_db)):
+
+    # 🔍 CHECK IF TITLE EXISTS
+    existing = db.query(Course).filter(Course.title == data.title).first()
+
+    if existing:
+        raise HTTPException(
+            status_code=400,
+            detail="Course with this title already exists"
+        )
+
+    # ✅ CREATE COURSE
+    course = Course(**data.dict())
+
+    db.add(course)
     db.commit()
-    db.refresh(new_course)
-    return(new_course)
+    db.refresh(course)
+
+    return {
+        "message": "Course created successfully",
+        "course": course
+    }
 
 
 # get all courses
