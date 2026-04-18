@@ -7,8 +7,9 @@ export const AuthProvider = ({ children }) => {
     return JSON.parse(localStorage.getItem("user")) || null;
   });
 
-  const login = (token, role, name, email) => {
-    const userData = { token, role, name, email };
+  // ✅ FIXED LOGIN FUNCTION
+  const login = (token, role, name, email, id) => {
+    const userData = { token, role, name, email, id };
 
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(userData));

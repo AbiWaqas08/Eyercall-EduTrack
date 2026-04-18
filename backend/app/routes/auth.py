@@ -59,7 +59,9 @@ def login(data: LoginSchema, db: Session = Depends(get_db)):
 
     return {
         "access_token": token,
+        "id": user.id,
         "role": user.role,
         "name": user.name,
-        "email": user.email
+        "email": user.email,
+        
     }

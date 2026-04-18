@@ -41,13 +41,30 @@ def get_students(db: Session = Depends(get_db)):
 
 # get single student
 @router.get("/{id}")
-def get_student(id : int, db : Session = Depends(get_db)):
-    student = db.qurey(User).filter(User.id == id).all()
+def get_student(id: int, db: Session = Depends(get_db)):
+    student = db.query(User).filter(User.id == id).first()
 
     if not student:
-        raise HTTPException(status_code=404, detail="student not found")
-    
-    return student
+        return {"error": "Student not found"}
+
+    return {
+        "id": student.id,
+        "name": student.name,
+        "email": student.email,
+        "role": student.role,
+        "fee_status": student.fee_status,
+        "course_end_date": student.course_end_date,
+
+        "course": {
+            "id": student.course.id if student.course else None,
+            "title": student.course.title if student.course else None
+        },
+
+        "batch": {
+            "id": student.batch.id if student.batch else None,
+            "name": student.batch.name if student.batch else None
+        }
+    }
 
 # update student
 @router.put("/{id}")
@@ -56,7 +73,7 @@ def update_student(id: int, data: StudentCreate, db: Session = Depends(get_db)):
 
     if not student:
         raise HTTPException(status_code=404, detail="Student not found")
-
+    
     student.name = data.name
     student.email = data.email
     student.course_id = data.course_id

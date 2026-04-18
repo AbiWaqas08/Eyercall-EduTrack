@@ -23,7 +23,8 @@ const Login = () => {
       res.data.access_token,
       res.data.role,
       res.data.name,
-      res.data.email
+      res.data.email,
+      res.data.id
     );
 
     //  ROLE BASED REDIRECT

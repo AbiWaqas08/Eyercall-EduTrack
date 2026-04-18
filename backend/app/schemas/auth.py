@@ -19,3 +19,4 @@ class TokenResponse(BaseModel):
     role: str
     name: str
     email: str
+    id: int
