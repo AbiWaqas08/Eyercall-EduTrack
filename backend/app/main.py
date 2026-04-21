@@ -9,6 +9,7 @@ from app.routes import auth
 from app.routes import student_routes
 from app.routes import course_routes
 from app.routes import batch_routes
+from app.routes import assignment_routes
 
 
 Base.metadata.create_all(bind=engine)
@@ -30,6 +31,7 @@ app.include_router(auth.router)
 app.include_router(student_routes.router)
 app.include_router(course_routes.router)
 app.include_router(batch_routes.router)
+app.include_router(assignment_routes.router)
 
 
 # ✅ TEST ROUTE

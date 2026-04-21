@@ -8,16 +8,16 @@ class Assignment(Base):
     # table name
     __tablename__ = "assignments"
     # columns
-    id = Column()
-    title = Column()
-    description = Column()
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String(200))
+    description = Column(String(500))
 
     # forign key
-    course_id = Column(Integer, ForeignKey("course.id"))
+    course_id = Column(Integer, ForeignKey("courses.id"))
     batch_id = Column(Integer, ForeignKey("batches.id"))
 
     due_date = Column(DateTime)
-    creaated_at = Column(DateTime, default=datetime.datetime.utcnow)
+    creaated_at = Column(DateTime, default=datetime.datetime.utcnow())
 
     # realationships
-    submission = relationship("submission", back_populates="assignment")
+    # submission = relationship("submission", back_populates="assignment")
