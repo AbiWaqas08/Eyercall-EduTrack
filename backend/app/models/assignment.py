@@ -17,7 +17,7 @@ class Assignment(Base):
     batch_id = Column(Integer, ForeignKey("batches.id"))
 
     due_date = Column(DateTime)
-    creaated_at = Column(DateTime, default=datetime.datetime.utcnow())
+    creaated_at = Column(DateTime, default=datetime.datetime.utcnow)
 
     # realationships
     # submission = relationship("submission", back_populates="assignment")
